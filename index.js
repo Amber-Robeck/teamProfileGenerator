@@ -80,6 +80,23 @@ const moreEmployees = () => {
             choices: ["Engineer", "Intern", "I don't have any more to add."]
         },
     ])
+        .then(choices => {
+            // console.log(choices.name)
+            if (choices.name === "I don't have anymore to add") {
+                //write html file
+                console.log("no more to add")
+                return;
+            }
+            else if (choices.name === "Intern") {
+                //Intern questions
+                console.log("you are adding an Intern")
+                return;
+            } else {
+                //engineer questions
+                console.log("you are adding an engineer");
+                return;
+            }
+        });
 }
 
 init();
