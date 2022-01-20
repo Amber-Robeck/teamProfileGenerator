@@ -3,7 +3,7 @@ const fs = require("fs");
 const team = require("./src/page-template");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const { Intern, internQuest } = require("./lib/Intern");
 const Employee = require("./lib/Employee");
 let myTeam = [];
 
@@ -95,8 +95,8 @@ const moreEmployees = () => {
             }
             else if (choices.name === "Intern") {
                 //Intern questions
-                newIntern();
-                console.log("you are adding an Intern")
+                newIntern()
+                // console.log("you are adding an Intern")
                 return;
             }
             else if (choices.name === "Engineer") {
@@ -112,66 +112,12 @@ const moreEmployees = () => {
 }
 
 const newIntern = () => {
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "name",
-            message: "What is the intern's name?",
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the intern's name!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: "number",
-            name: "id",
-            message: "What is the intern's ID number?",
-            validate: nameInput => {
-                if (isNaN(nameInput)) {
-                    console.log("Please enter a valid ID number!");
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        },
-        {
-            type: "input",
-            name: "school",
-            message: "What school did the intern attend?",
-            validate: schoolInput => {
-                if (schoolInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the intern's school!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the interns email address?",
-            validate: email => {
-                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-                if (valid) {
-                    return true;
-                } else {
-                    console.log('Please enter a valid email!');
-                    return false;
-                }
-            }
-        },
-    ])
+    inquirer.prompt(internQuest)
         .then(internInput => {
             const { name, id, email, school } = internInput;
             const intern = new Intern(name, id, email, school);
             myTeam.push(intern);
-            console.log(intern);
+            // console.log(intern);
             moreEmployees();
         });
 }
