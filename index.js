@@ -82,20 +82,90 @@ const moreEmployees = () => {
     ])
         .then(choices => {
             // console.log(choices.name)
-            if (choices.name === "I don't have anymore to add") {
+            if (choices.name === "I don't have any more to add.") {
                 //write html file
                 console.log("no more to add")
                 return;
             }
             else if (choices.name === "Intern") {
                 //Intern questions
+                newIntern();
                 console.log("you are adding an Intern")
                 return;
-            } else {
+            }
+            else if (choices.name === "Engineer") {
                 //engineer questions
                 console.log("you are adding an engineer");
                 return;
+            } else {
+                console.log("invalid choice!")
+                return;
             }
+        });
+}
+
+const newIntern = () => {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the intern's name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the intern's name!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: "number",
+            name: "id",
+            message: "What is the intern's ID number?",
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.log("Please enter a valid ID number!");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What school did the intern attend?",
+            validate: schoolInput => {
+                if (schoolInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the intern's school!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the interns email address?",
+            validate: email => {
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+                if (valid) {
+                    return true;
+                } else {
+                    console.log('Please enter a valid email!');
+                    return false;
+                }
+            }
+        },
+    ])
+        .then(internInput => {
+            const { name, id, email, school } = internInput;
+            const intern = new Intern(name, id, email, school);
+
+            console.log(intern);
+            moreEmployees();
         });
 }
 
