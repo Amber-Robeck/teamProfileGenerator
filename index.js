@@ -1,10 +1,12 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const pt = require("./src/page-template");
+const team = require("./src/page-template");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Employee = require("./lib/Employee");
+let myTeam = [];
+
 
 const init = () => {
     inquirer.prompt([
@@ -65,8 +67,8 @@ const init = () => {
         .then(managerInput => {
             const { name, id, email, officeNumber } = managerInput;
             const teamManager = new Manager(name, id, email, officeNumber);
-
-            console.log(teamManager);
+            myTeam.push(teamManager);
+            // console.log(team(teamManager));
             moreEmployees();
         });
 }
@@ -85,6 +87,9 @@ const moreEmployees = () => {
             if (choices.name === "I don't have any more to add.") {
                 //write html file
                 console.log("no more to add")
+                console.log(myTeam)
+                //This needs to write to page
+                console.log(team(myTeam))
                 return;
             }
             else if (choices.name === "Intern") {
@@ -164,7 +169,7 @@ const newIntern = () => {
         .then(internInput => {
             const { name, id, email, school } = internInput;
             const intern = new Intern(name, id, email, school);
-
+            myTeam.push(intern);
             console.log(intern);
             moreEmployees();
         });
@@ -229,7 +234,7 @@ const newEngineer = () => {
         .then(engineerInput => {
             const { name, id, email, github } = engineerInput;
             const engineer = new Engineer(name, id, email, github);
-
+            myTeam.push(engineer);
             console.log(engineer);
             moreEmployees();
         });
