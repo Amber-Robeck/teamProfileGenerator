@@ -4,7 +4,6 @@ const team = require("./src/page-template");
 const Manager = require("./lib/Manager");
 const { Engineer, engineerQuest } = require("./lib/Engineer");
 const { Intern, internQuest } = require("./lib/Intern");
-const Employee = require("./lib/Employee");
 let myTeam = [];
 
 
