@@ -6,18 +6,17 @@ const { Engineer, engineerQuest } = require("./lib/Engineer");
 const { Intern, internQuest } = require("./lib/Intern");
 let myTeam = [];
 
-
+//starts app and creates manager with userInput
 const init = () => {
     inquirer.prompt(managerQuest)
         .then(managerInput => {
             const { name, id, email, officeNumber } = managerInput;
             const teamManager = new Manager(name, id, email, officeNumber);
             myTeam.push(teamManager);
-            // console.log(team(teamManager));
             moreEmployees();
         });
 }
-
+//prompts user about adding more team members
 const moreEmployees = () => {
     inquirer.prompt([
         {
@@ -28,26 +27,19 @@ const moreEmployees = () => {
         },
     ])
         .then(choices => {
-            // console.log(choices.name)
             if (choices.name === "I don't have any more to add.") {
                 //write html file
-                console.log("no more to add")
-                console.log(myTeam)
                 writePage();
-                //This needs to write to page
-                console.log(team(myTeam))
                 return;
             }
             else if (choices.name === "Intern") {
                 //Intern questions
-                newIntern()
-                // console.log("you are adding an Intern")
+                newIntern();
                 return;
             }
             else if (choices.name === "Engineer") {
                 //engineer questions
                 newEngineer();
-                console.log("you are adding an engineer");
                 return;
             } else {
                 console.log("invalid choice!")
@@ -56,33 +48,35 @@ const moreEmployees = () => {
         });
 }
 
+//starts intern questions and creates intern with user input
 const newIntern = () => {
     inquirer.prompt(internQuest)
         .then(internInput => {
             const { name, id, email, school } = internInput;
             const intern = new Intern(name, id, email, school);
             myTeam.push(intern);
-            // console.log(intern);
             moreEmployees();
         });
 }
 
+//starts engineer questions and creates engineer with user input
 const newEngineer = () => {
     inquirer.prompt(engineerQuest)
         .then(engineerInput => {
             const { name, id, email, github } = engineerInput;
             const engineer = new Engineer(name, id, email, github);
             myTeam.push(engineer);
-            console.log(engineer);
             moreEmployees();
         });
 }
 
+//creates html page and writes team to page
 function writePage() {
     let htmlCode = team(myTeam);
     fs.writeFile("./dist/index.html", htmlCode,
         (err) => {
             if (err) {
+                //throw error??
                 console.log(err);
             }
             console.log("Successful!");
