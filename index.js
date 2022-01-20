@@ -88,6 +88,7 @@ const moreEmployees = () => {
                 //write html file
                 console.log("no more to add")
                 console.log(myTeam)
+                writePage();
                 //This needs to write to page
                 console.log(team(myTeam))
                 return;
@@ -238,6 +239,17 @@ const newEngineer = () => {
             console.log(engineer);
             moreEmployees();
         });
+}
+
+function writePage() {
+    let htmlCode = team(myTeam);
+    fs.writeFile("./dist/index.html", htmlCode,
+        (err) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log("Successful!");
+        })
 }
 
 init();
