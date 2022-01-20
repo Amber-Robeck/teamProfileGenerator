@@ -77,6 +77,7 @@ function writePage() {
         (err) => {
             if (err) {
                 //throw error??
+                //catch error??
                 console.log(err);
             }
             console.log("Successful!");
