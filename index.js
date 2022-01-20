@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const team = require("./src/page-template");
 const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
+const { Engineer, engineerQuest } = require("./lib/Engineer");
 const { Intern, internQuest } = require("./lib/Intern");
 const Employee = require("./lib/Employee");
 let myTeam = [];
@@ -123,61 +123,7 @@ const newIntern = () => {
 }
 
 const newEngineer = () => {
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "name",
-            message: "What is the engineers's name?",
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the engineers's name!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: "number",
-            name: "id",
-            message: "What is the engineers's ID number?",
-            validate: nameInput => {
-                if (isNaN(nameInput)) {
-                    console.log("Please enter a valid ID number!");
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        },
-        {
-            type: "input",
-            name: "github",
-            message: "What is the engineers gitHub profile name?",
-            validate: githubInput => {
-                if (githubInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the engineers gitHub profile!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the engineer's email address?",
-            validate: email => {
-                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-                if (valid) {
-                    return true;
-                } else {
-                    console.log('Please enter a valid email!');
-                    return false;
-                }
-            }
-        },
-    ])
+    inquirer.prompt(engineerQuest)
         .then(engineerInput => {
             const { name, id, email, github } = engineerInput;
             const engineer = new Engineer(name, id, email, github);
