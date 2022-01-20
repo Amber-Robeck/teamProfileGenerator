@@ -95,6 +95,7 @@ const moreEmployees = () => {
             }
             else if (choices.name === "Engineer") {
                 //engineer questions
+                newEngineer();
                 console.log("you are adding an engineer");
                 return;
             } else {
@@ -165,6 +166,71 @@ const newIntern = () => {
             const intern = new Intern(name, id, email, school);
 
             console.log(intern);
+            moreEmployees();
+        });
+}
+
+const newEngineer = () => {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the engineers's name?",
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the engineers's name!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: "number",
+            name: "id",
+            message: "What is the engineers's ID number?",
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.log("Please enter a valid ID number!");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What is the engineers gitHub profile name?",
+            validate: githubInput => {
+                if (githubInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the engineers gitHub profile!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the engineer's email address?",
+            validate: email => {
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+                if (valid) {
+                    return true;
+                } else {
+                    console.log('Please enter a valid email!');
+                    return false;
+                }
+            }
+        },
+    ])
+        .then(engineerInput => {
+            const { name, id, email, github } = engineerInput;
+            const engineer = new Engineer(name, id, email, github);
+
+            console.log(engineer);
             moreEmployees();
         });
 }
