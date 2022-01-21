@@ -37,6 +37,7 @@ https://user-images.githubusercontent.com/94136164/150456298-69e20293-3f7f-4493-
 
     
 
+[link to whole video](https://drive.google.com/file/d/15BAasamR3Zf0nsIqQc1_I0XyywZZybvh/view?usp=sharing "Whole walkthrough video")
   ---
 
   ## Screenshots
