@@ -6,7 +6,10 @@
 
  ## Description
 
-    Welcome to my Team profile generator! This application was created with Node.js using the build in package fs(File System), third-party packages Jest (for testing) and Inquirer (for collectin user input). This application is ran from the back-end and does not have a deployed page however, once running the application it does create an html page that can be view in the browser! 
+    Welcome to my Team profile generator! This application was created with Node.js using the build in package
+    fs(File System), third-party packages Jest (for testing) and Inquirer (for collectin user input). This
+    application is ran from the back-end and does not have a deployed page however, 
+    once running the application it does create an html page that can be view in the browser! 
 
   ---
 
